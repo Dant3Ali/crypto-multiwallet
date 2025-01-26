@@ -1,7 +1,7 @@
 import {Connection, PublicKey} from "@solana/web3.js";
-import CoinMarketCapApiService from "../coin-marketup/CoinMarketCapApiService";
+import CoinMarketCapApi from "../coin-marketup/coin-market-cap.api";
 import BigNumber from "bignumber.js";
-import ApiService from "../ApiService";
+import ApiService from "../api-service";
 
 
 class MainnetApi extends ApiService {
@@ -19,7 +19,7 @@ class MainnetApi extends ApiService {
     }
 
     async getSolanaBalanceInUSD(address: string): Promise<string> {
-        const coinMarketCap = new CoinMarketCapApiService(process.env.COIN_MARKET_CAP_URI as string);
+        const coinMarketCap = new CoinMarketCapApi(process.env.COIN_MARKET_CAP_URI as string);
         let coins = await this.getBalance(address);
         const solPrice = await coinMarketCap.getCryptoPrice('SOL');
 

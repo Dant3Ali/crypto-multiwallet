@@ -1,8 +1,8 @@
-import ApiService from "../ApiService";
+import ApiService from "../api-service";
 import BigNumber from "bignumber.js";
-import CoinMarketCapApiService from "../coin-marketup/CoinMarketCapApiService";
+import CoinMarketCapApi from "../coin-marketup/coin-market-cap.api";
 
-const coinMarketCap = new CoinMarketCapApiService(process.env.COIN_MARKET_CAP_URI as string || 'https://pro-api.coinmarketcap.com');
+const coinMarketCap = new CoinMarketCapApi(process.env.COIN_MARKET_CAP_URI as string || 'https://pro-api.coinmarketcap.com');
 
 class BscScanApi extends ApiService {
     private apiKey: string;

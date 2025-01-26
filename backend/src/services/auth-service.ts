@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
-import AuthorizationError from "../errors/AuthorizationError";
+import AuthorizationError from "../errors/authorization.error";
+import user from "../models/user";
 
 const SECRET_KEY = process.env.JWT_SECRET || 'your_secret_key';
 
@@ -15,4 +16,8 @@ export function verifyToken(token: string): any {
     } catch (err) {
         throw new AuthorizationError('Invalid token');
     }
+}
+
+export function findUserByEmail(email: string): any {
+    return user.findOne({ email });
 }

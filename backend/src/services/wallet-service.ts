@@ -5,10 +5,10 @@ import * as bip32 from 'bip32';
 import * as ecc from 'tiny-secp256k1';
 import * as bitcoin from 'bitcoinjs-lib';
 import sol, {Connection, PublicKey} from '@solana/web3.js'
-import {dogecoinNetwork} from "../networks/dogecoinNetwork";
-import BlockCypherApi from "../external-apis/block-cypher/BlockCypherApi";
-import BscScanApi from "../external-apis/bscscan/BscScan";
-import MainnetApi from "../external-apis/mainnet/MainnetApi";
+import {dogecoinNetwork} from "../constants/networks/dogecoin.network";
+import BlockCypherApi from "../external-apis/block-cypher/block-cypher.api";
+import BscScanApi from "../external-apis/bscscan/bsc-scan.api";
+import MainnetApi from "../external-apis/mainnet/mainnet-api";
 
 const bipFactory = bip32.BIP32Factory(ecc);
 

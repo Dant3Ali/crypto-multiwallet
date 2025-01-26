@@ -1,6 +1,6 @@
-import ApiService from '../ApiService';
+import ApiService from '../api-service';
 
-class CoinMarketCapApiService extends ApiService {
+class CoinMarketCapApi extends ApiService {
 
     constructor(baseUrl: string) {
         super(baseUrl);
@@ -22,4 +22,4 @@ class CoinMarketCapApiService extends ApiService {
     }
 }
 
-export default CoinMarketCapApiService;
+export default CoinMarketCapApi;

@@ -5,9 +5,9 @@ import {
     generateDOGEAddress,
     generateSOLAddress,
     getBalance
-} from '../services/walletService';
-import {authMiddleware} from "../middleware/authMiddleware";
-import WalletModel from '../models/Wallet';
+} from '../services/wallet-service';
+import {authMiddleware} from "../middleware/auth-middleware";
+import WalletModel from '../models/wallet';
 import {assertArgument, LangEn} from "ethers";
 
 const router = new Router({ prefix: '/wallet' });

@@ -1,6 +1,6 @@
-import {verifyToken} from '../services/authService';
+import {verifyToken} from '../services/auth-service';
 import * as koa from 'koa';
-import AuthorizationError from "../errors/AuthorizationError";
+import AuthorizationError from "../errors/authorization.error";
 
 export const authMiddleware = async (ctx: koa.Context, next: koa.Next) => {
     const token = ctx.headers.authorization?.split(' ')[1];
