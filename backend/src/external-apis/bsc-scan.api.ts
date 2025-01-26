@@ -1,6 +1,6 @@
-import ApiService from "../api-service";
+import ApiService from "./api-service";
 import BigNumber from "bignumber.js";
-import CoinMarketCapApi from "../coin-marketup/coin-market-cap.api";
+import CoinMarketCapApi from "./coin-market-cap.api";
 
 const coinMarketCap = new CoinMarketCapApi(process.env.COIN_MARKET_CAP_URI as string || 'https://pro-api.coinmarketcap.com');
 

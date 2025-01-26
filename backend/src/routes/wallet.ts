@@ -5,12 +5,12 @@ import {
     generateDOGEAddress,
     generateSOLAddress,
     getBalance
-} from '../services/wallet-service';
-import {authMiddleware} from "../middleware/auth-middleware";
+} from '../services/wallet.service';
+import {authMiddleware} from "../middleware/auth.middleware";
 import WalletModel from '../models/wallet';
 import {assertArgument, LangEn} from "ethers";
 
-const router = new Router({ prefix: '/wallet' });
+const router = new Router({prefix: '/wallet'});
 
 interface ImportSeedBody {
     seedPhrase: string;
@@ -23,12 +23,15 @@ router.get('/', authMiddleware, async (ctx) => {
 });
 
 router.post('/import', authMiddleware, async (ctx) => {
-    const { seedPhrase, currency } = ctx.request.body as ImportSeedBody;
+    const {seedPhrase, currency} = ctx.request.body as ImportSeedBody;
     const userId = ctx.state.user.id
     const wordList = LangEn.wordlist()
     const words = wordList.split(seedPhrase);
-    assertArgument((words.length % 3) === 0 && words.length >= 12 && words.length <= 24, "Wrong seed phrase length"
-    , "seedPhrase", words.length);
+    assertArgument((words.length % 3) === 0
+        && words.length >= 12
+        && words.length <= 24,
+        "Wrong seed phrase length",
+        "seedPhrase", words.length);
 
     let address;
     switch (currency.toLowerCase()) {
@@ -50,16 +53,16 @@ router.post('/import', authMiddleware, async (ctx) => {
     }
 
 
-    const wallet = new WalletModel({ seedPhrase, address, userId, currency });
+    const wallet = new WalletModel({seedPhrase, address, userId, currency});
     await wallet.save();
 
-    ctx.body = { wallet };
+    ctx.body = {wallet};
 });
 
 router.get('/balance/:currency/:address', authMiddleware, async (ctx) => {
-    const { currency, address } = ctx.params;
+    const {currency, address} = ctx.params;
     const balance = await getBalance(currency, address);
-    ctx.body = { balance };
+    ctx.body = {balance};
 });
 
 export default router;

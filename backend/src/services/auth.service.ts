@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import AuthorizationError from "../errors/authorization.error";
-import user from "../models/user";
+import user, {IUser} from "../models/user";
+import User from "../models/user";
 
 const SECRET_KEY = process.env.JWT_SECRET || 'your_secret_key';
 
@@ -18,6 +19,15 @@ export function verifyToken(token: string): any {
     }
 }
 
+export function addUser(email: string, password: string): any {
+    const user = new User({ email, password });
+    return user.save();
+}
+
 export function findUserByEmail(email: string): any {
-    return user.findOne({ email });
+    return User.findOne({ email });
+}
+
+export function comparePassword(user: IUser, password: string): Promise<boolean> {
+    return user.comparePassword(password);
 }

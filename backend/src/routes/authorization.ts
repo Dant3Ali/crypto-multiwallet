@@ -1,6 +1,6 @@
 import Router from 'koa-router';
 import User from '../models/user';
-import {generateToken, findUserByEmail} from '../services/auth-service';
+import {generateToken, findUserByEmail, comparePassword, addUser} from '../services/auth.service';
 
 const router = new Router({ prefix: "/auth" });
 
@@ -14,12 +14,14 @@ router.post("/register", async (ctx) => {
     if (!email || !password) {
         ctx.throw(400, 'Email and password are required');
     }
+
     const existingUser = await findUserByEmail(email);
+    console.log(existingUser)
     if (existingUser) {
         ctx.throw(400, 'User already exists');
     }
-    const user = new User({ email, password });
-    await user.save();
+
+    await addUser(email, password)
     ctx.body = { message: 'User registered successfully' };
 });
 
@@ -29,7 +31,7 @@ router.post('/login', async (ctx) => {
         ctx.throw(400, 'Email and password are required');
     }
     const user = await findUserByEmail(email);
-    if (!user || !(await user.comparePassword(password))) {
+    if (!user || !(await comparePassword(user, password))) {
         ctx.throw(400, 'Invalid credentials');
     }
 

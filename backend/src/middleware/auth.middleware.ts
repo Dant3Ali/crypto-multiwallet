@@ -1,4 +1,4 @@
-import {verifyToken} from '../services/auth-service';
+import {verifyToken} from '../services/auth.service';
 import * as koa from 'koa';
 import AuthorizationError from "../errors/authorization.error";
 

@@ -5,10 +5,11 @@ import * as bip32 from 'bip32';
 import * as ecc from 'tiny-secp256k1';
 import * as bitcoin from 'bitcoinjs-lib';
 import sol, {Connection, PublicKey} from '@solana/web3.js'
-import {dogecoinNetwork} from "../constants/networks/dogecoin.network";
-import BlockCypherApi from "../external-apis/block-cypher/block-cypher.api";
-import BscScanApi from "../external-apis/bscscan/bsc-scan.api";
-import MainnetApi from "../external-apis/mainnet/mainnet-api";
+import {dogecoinNetwork} from "../networks/dogecoin-network";
+import BlockCypherApi from "../external-apis/block-cypher.api";
+import BscScanApi from "../external-apis/bsc-scan.api";
+import MainnetApi from "../external-apis/mainnet.api";
+import {BLOCK_CYPHER_URI, BSCSCAN_URI, ETHERSCAN, SOLANA_URI} from "../constants";
 
 const bipFactory = bip32.BIP32Factory(ecc);
 
@@ -50,23 +51,23 @@ export function generateSOLAddress(seedPhrase: string): string {
 export async function getBalance(currency: string, address: string): Promise<string> {
     switch (currency.toLowerCase()) {
         case "btc": {
-            const blockCypherApi = new BlockCypherApi(process.env.BLOCK_CYPHER_URI as string);
+            const blockCypherApi = new BlockCypherApi(BLOCK_CYPHER_URI);
             return await blockCypherApi.getBitcoinBalanceInUSD(address);
         }
         case "eth": {
-            const blockCypherApi = new BlockCypherApi(process.env.BLOCK_CYPHER_URI as string);
+            const blockCypherApi = new BlockCypherApi(BLOCK_CYPHER_URI);
             return await blockCypherApi.getEthereumBalanceInUSD(address);
         }
         case "bnb": {
-            const bscScanApi = new BscScanApi(process.env.BSCSCAN_URI as string, process.env.ETHERSCAN as string);
+            const bscScanApi = new BscScanApi(BSCSCAN_URI, ETHERSCAN);
             return await bscScanApi.getBinanceBalanceInUSD(address);
         }
         case "doge": {
-            const blockCypherApi = new BlockCypherApi(process.env.BLOCK_CYPHER_URI as string);
+            const blockCypherApi = new BlockCypherApi(BLOCK_CYPHER_URI);
             return await blockCypherApi.getDogecoinBalanceInUSD(address);
         }
         case "sol": {
-            const mainnetApi = new MainnetApi(process.env.SOLANA_URI as string);
+            const mainnetApi = new MainnetApi(SOLANA_URI);
             return await mainnetApi.getSolanaBalanceInUSD(address);
         }
         default:

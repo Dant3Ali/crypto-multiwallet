@@ -1,7 +1,7 @@
 import {Connection, PublicKey} from "@solana/web3.js";
-import CoinMarketCapApi from "../coin-marketup/coin-market-cap.api";
+import CoinMarketCapApi from "./coin-market-cap.api";
 import BigNumber from "bignumber.js";
-import ApiService from "../api-service";
+import ApiService from "./api-service";
 
 
 class MainnetApi extends ApiService {
