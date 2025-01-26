@@ -51,23 +51,23 @@ export function generateSOLAddress(seedPhrase: string): string {
 export async function getBalance(currency: string, address: string): Promise<string> {
     switch (currency.toLowerCase()) {
         case "btc": {
-            const blockCypherApi = new BlockCypherApi(BLOCK_CYPHER_URI);
+            const blockCypherApi = new BlockCypherApi(process.env.BLOCK_CYPHER_URI as string);
             return await blockCypherApi.getBitcoinBalanceInUSD(address);
         }
         case "eth": {
-            const blockCypherApi = new BlockCypherApi(BLOCK_CYPHER_URI);
+            const blockCypherApi = new BlockCypherApi(process.env.BLOCK_CYPHER_URI as string);
             return await blockCypherApi.getEthereumBalanceInUSD(address);
         }
         case "bnb": {
-            const bscScanApi = new BscScanApi(BSCSCAN_URI, ETHERSCAN);
+            const bscScanApi = new BscScanApi(process.env.BSCSCAN_URI as string, process.env.ETHERSCAN as string);
             return await bscScanApi.getBinanceBalanceInUSD(address);
         }
         case "doge": {
-            const blockCypherApi = new BlockCypherApi(BLOCK_CYPHER_URI);
+            const blockCypherApi = new BlockCypherApi(process.env.BLOCK_CYPHER_URI as string);
             return await blockCypherApi.getDogecoinBalanceInUSD(address);
         }
         case "sol": {
-            const mainnetApi = new MainnetApi(SOLANA_URI);
+            const mainnetApi = new MainnetApi(process.env.SOLANA_URI as string);
             return await mainnetApi.getSolanaBalanceInUSD(address);
         }
         default:
