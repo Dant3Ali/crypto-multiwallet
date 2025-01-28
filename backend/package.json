@@ -1,0 +1,50 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node src/app.ts",
+    "build": "tsc",
+    "serve": "node dist/app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@koa/cors": "^5.0.0",
+    "@types/bcrypt": "^5.0.2",
+    "@types/bip32": "^2.0.4",
+    "@types/bitcoinjs-lib": "^5.0.4",
+    "@types/jsonwebtoken": "^9.0.8",
+    "@types/koa": "^2.15.0",
+    "@types/koa__cors": "^5.0.0",
+    "@types/koa-bodyparser": "^4.3.12",
+    "@types/koa-router": "^7.4.8",
+    "@types/mongoose": "^5.11.97",
+    "@types/node": "^22.10.10",
+    "axios": "^1.7.9",
+    "bcrypt": "^5.1.1",
+    "bip39": "^3.1.0",
+    "ethers": "^6.13.5",
+    "jsonwebtoken": "^9.0.2",
+    "tiny-secp256k1": "^2.2.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "@solana/web3.js": "^1.98.0",
+    "bignumber.js": "^9.1.2",
+    "bip32": "^5.0.0-rc.0",
+    "bitcoinjs-lib": "^6.1.7",
+    "bitcore-lib-ltc": "^10.7.0",
+    "dotenv": "^16.4.7",
+    "koa": "^2.15.3",
+    "koa-body": "^6.0.1",
+    "koa-bodyparser": "^4.4.1",
+    "koa-router": "^13.0.1",
+    "litecore-lib": "^0.13.22",
+    "mongoose": "^8.9.5",
+    "node-litecoin": "^1.0.1"
+  }
+}
